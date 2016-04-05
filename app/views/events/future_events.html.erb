@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= link_to event.title, controller: 'events', action: 'event_info', id: event.id %></td>
+      <td><%= event.description %></td>    
+   </tr>
+  <% end %>
+</table>

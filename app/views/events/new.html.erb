@@ -1,0 +1,68 @@
+<div class="Create_Event">
+
+	<h1> Create your Event </h1>
+
+<%= form_for :event do |f| %>
+	<p>
+		<%= f.label :Title %>
+		<%= f.text_field :title %>
+	</p>
+
+	<p>
+		<%= f.label :description %>
+		<%= f.text_field :description %>
+	</p>
+	
+	<p>
+		<%= f.label :start_date %>
+		<%= f.text_field :start_date %>
+	</p>
+
+
+	<p>
+		<%= f.label :end_date %>
+		<%= f.text_field :end_date %>
+	</p>
+
+
+	<p>
+		<%= f.label :start_time %>
+		<%= f.text_field :start_time %>
+	</p>
+
+	<p>
+		<%= f.label :end_time %>
+		<%= f.text_field :end_time %>
+	</p>
+
+
+	<p>
+		<%= f.label :city %>
+		<%= f.text_field :city %>
+	</p>
+
+	<p>
+		<%= f.label :address %>
+		<%= f.text_field :address %>
+	</p>
+	
+	<p>
+		<%= f.label :event_creater %>
+		<%= f.text_field :event_creater %>
+	</p>
+
+	<p>
+		<%= f.submit 'Create Event' , controller: 'events', action: 'create' %>
+	</p>
+<% end %>
+
+	<% if false %>	
+	<% if @event.error.any? %>
+		<ul class = "Creation_error">
+			<% for message_error in @event.errors.full_messages %>
+				<li> <%= message_error %> </li>
+			<% end %>
+		</ul>
+	<% end %>
+	<% end %>
+</div>

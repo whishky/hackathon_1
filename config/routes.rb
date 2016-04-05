@@ -4,6 +4,17 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'events#start'
+
+  get 'events/show' => 'events#show'
+  get 'events/new' => 'events#new'
+  post 'events/new' => 'events#create'
+  post 'events/create'
+  get 'events/event_info' => 'events#event_info'
+  get 'events/present_events' => 'events#_present_events'
+  get 'events/past_events' => 'events#past_events'
+  get 'events/future_events' => 'events#future_events'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
