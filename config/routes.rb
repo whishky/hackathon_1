@@ -6,14 +6,19 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'events#start'
 
+  get 'events/present_events' => 'events#_present_events'
+  get 'events/past_events' => 'events#past_events'
+  get 'events/future_events' => 'events#future_events'
+  resources :events
   get 'events/show' => 'events#show'
   get 'events/new' => 'events#new'
   post 'events/new' => 'events#create'
   post 'events/create'
-  get 'events/event_info' => 'events#event_info'
-  get 'events/present_events' => 'events#_present_events'
-  get 'events/past_events' => 'events#past_events'
-  get 'events/future_events' => 'events#future_events'
+  get 'events/event_info/:id' => 'events#event_info'
+  get 'events/edit' => 'events#edit'
+  post 'events/:id/edit' => 'events#update'
+
+  #post '/events/:id/edit' => 'events#update'
 
 
   # Example of regular route:

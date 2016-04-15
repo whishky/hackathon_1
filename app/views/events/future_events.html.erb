@@ -14,7 +14,8 @@
   <% @events.each do |event| %>
     <tr>
       <td><%= link_to event.title, controller: 'events', action: 'event_info', id: event.id %></td>
-      <td><%= event.description %></td>    
+      <td><%= event.description %></td>  
+      <td><%= link_to 'Edit', controller: 'events', action: 'edit', id: event.id %></td>   
    </tr>
   <% end %>
 </table>
