@@ -8,6 +8,9 @@ gem 'pg', '~> 0.15'
 
 gem 'pry'
 
+#for password
+gem 'bcrypt'
+
 #bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'

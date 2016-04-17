@@ -1,55 +1,49 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      html, body {
-	height: 100%;      
-	margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
 
-	 <h1> New Event </h1>
-	 <p>
-	    	<strong>Title: </strong>
-		<%= @event.title %>
-	    </p>
 
-	    <p>
-	        <strong>Description:</strong>
-		<%= @event.description %>
-	    </p>
-		
-	    <p>
-	        <strong>Start Date and Time</strong>
-		<%= @event.start_date_time %>
-	    </p>
+<% provide(:title, @event.title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        
+          <p>
+        <strong>Title: </strong>
+    <%= @event.title %>
+      </p>
 
-	    <p>
-	    	<strong>End Date and Time  </strong>
-		<%= @event.end_date_time %>
-	    </p>
+      <p>
+          <strong>Description:</strong>
+    <%= @event.description %>
+      </p>
+    
+      <p>
+          <strong>Start Date and Time</strong>
+    <%= @event.start_date_time %>
+      </p>
 
-       	     <p>
+      <p>
+        <strong>End Date and Time  </strong>
+    <%= @event.end_date_time %>
+      </p>
+
+             <p>
                 <strong> City </strong>
                 <%= @event.city %>
             </p>
 
-       	     <p>
+             <p>
                 <strong> Address </strong>
                 <%= @event.address %>
              </p>
 
 
-  	      <p> 
-      		<strong> Event Creator </strong>
-    		<%= @event.event_creater %>
-		</p>
+          <p> 
+          <strong> Event Creator </strong>
+        <%= @event.event_creater %>
+    </p>
 
-  	</body>	
-</html>
+      </h1>
+    </section>
+  </aside>
+</div>
+
