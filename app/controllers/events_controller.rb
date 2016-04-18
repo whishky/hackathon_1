@@ -18,11 +18,12 @@ class EventsController < ApplicationController
 	end
 
 	def edit
+		#binding.pry
   		@event = Event.find(params[:id])
 	end
 
 	def update
-		binding.pry
+		#binding.pry
 		@event = Event.find(params[:id])
 		#@event = Event.new(event_params)
 		#binding.pry

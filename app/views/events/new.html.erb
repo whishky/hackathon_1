@@ -1,10 +1,14 @@
-<div class="Create_Event">
+<!--<div class="Create_Event">-->
+<% provide(:title, 'Create Event') %>
+<h1>Create Event</h1>
 
-	<h1> Create your Event </h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
 <%= form_for :event do |f| %>
+	<%#= render 'shared/error_message_event_creation' %>
 	<p>
-		<%= f.label :Title %>
+		<%= f.label :title %>
 		<%= f.text_field :title %>
 	</p>
 
@@ -39,9 +43,11 @@
 	</p>
 
 	<p>
-		<%= f.submit 'Create Event' , controller: 'events', action: 'create' %>
+		<%= f.submit 'Create Event', class: "btn btn-primary", controller: 'events', action: 'create' %>
 	</p>
 <% end %>
+  </div>
+</div>
 
 	<% if false %>	
 	<% if @event.error.any? %>
