@@ -11,6 +11,13 @@ gem 'pry'
 #for password
 gem 'bcrypt'
 
+#for creating fake users
+gem 'faker'
+
+#for pagination
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 #bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
