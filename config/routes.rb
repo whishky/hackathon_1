@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
 
   resources :users
+  resources :account_activations, only: [:edit]
 
   #post '/events/:id/edit' => 'events#update'
 
