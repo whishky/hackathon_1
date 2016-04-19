@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+
+	
 	def start
 
 	end
