@@ -3,9 +3,42 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= @user.name %>
+        <%= @user.name %> <br>
         <%= @user.email %>
       </h1>
     </section>
   </aside>
 </div>
+
+<h1> Events by 
+<%= @user.name %> </h1><br>
+
+<% if @events.count == 0 %>
+<p><%= @user.name %> is a mc, so there is no event from him</p>
+
+<% else %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+<table>
+  <tr>
+    <th>Title</th><br>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= link_to event.title, controller: 'events', action: 'event_info', id: event.id %></td>
+      <td><%= event.description %></td>   
+       <%if session[:user_id] == event.user_id %>
+      <td><%= link_to 'Edit', controller: 'events', action: 'edit', id: event.id %></td>
+      <%end%>
+   </tr>
+  <% end %>
+</table>
+    </section>
+  </aside>
+</div>
+
+<% end %>

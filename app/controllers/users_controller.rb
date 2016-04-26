@@ -9,7 +9,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
+    #binding.pry
 	   @user = User.find(params[:id])
+     @events = @user.events.all()
 	end
 
 	def new

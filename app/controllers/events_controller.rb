@@ -13,8 +13,9 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		@event = Event.new(event_params)
 		#binding.pry
+		@user = User.find(session[:user_id])
+		@event = @user.events.build(event_params)
 		if @event.save
 			redirect_to '/events/show'
 

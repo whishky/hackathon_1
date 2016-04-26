@@ -20,6 +20,9 @@
     <tr>
       <td><%= link_to event.title, controller: 'events', action: 'event_info', id: event.id %></td>
       <td><%= event.description %></td>   
+       <%if session[:user_id] == event.user_id %>
+      <td><%= link_to 'Edit', controller: 'events', action: 'edit', id: event.id %></td>
+      <%end%>
    </tr>
   <% end %>
 </table>
