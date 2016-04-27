@@ -1,10 +1,9 @@
-
-
 <table>
  
   <% @comments.each do |comment| %>
     <tr>
-      <td><%= comment.content %></td> <br>
+      <td><%= link_to User.find(comment.user_id).name, controller: 'users', action: 'show', id: comment.user_id %></td>
+      <td> => <%= comment.content %></td> <br>
    </tr>
   <% end %>
 </table>

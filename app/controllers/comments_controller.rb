@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
   def create
   	#binding.pry
   	@event = Event.find(params["id"])
+    @user = User.find(session[:user_id])
   	@comment = @event.comments.build(comment_params)
+    @comment["user_id"] = @user["id"]
     if @comment.save
       flash[:success] = "Comment created!"
       redirect_to root_url
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
   private
 
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content, :user_id)
     end
 
 end

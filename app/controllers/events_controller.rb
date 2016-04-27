@@ -63,6 +63,7 @@ class EventsController < ApplicationController
 	end
 
 	def event_info
+		binding.pry
 		@event = Event.find(params[:id])
 		@comments = @event.comments.paginate(page: params[:page])
 	end
