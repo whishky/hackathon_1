@@ -1,9 +1,18 @@
-<table>
- 
+<% provide(:title, 'All comments') %>
+
+<%#= will_paginate %>
+<ul class="comments">
+<% if @event.comments.any? %>
+      <h1>Comments (<%= @event.comments.count %>)</h1>
   <% @comments.each do |comment| %>
-    <tr>
-      <td><%= link_to User.find(comment.user_id).name, controller: 'users', action: 'show', id: comment.user_id %></td>
-      <td> => <%= comment.content %></td> <br>
-   </tr>
-  <% end %>
-</table>
+    <li>
+      <%= link_to User.find(comment.user_id).name, controller: 'users', action: 'show', id: comment.user_id %> => 
+      <%= comment.content %> <br>
+    </li>
+	<% end %>
+	<% end %>
+</ul>
+<%#= will_paginate %>
+
+
+
