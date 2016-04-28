@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 	belongs_to :user
 	has_many :taggings
 	has_many :tags, through: :taggings
-	has_many :comments, dependent: :destroy
+	has_many :comments
 	validates :user_id, presence: true
 	validates :title,  presence: true, length: { maximum: 50 }
 	validates :description,  presence: true, length: { maximum: 500 }
@@ -23,5 +23,5 @@ class Event < ActiveRecord::Base
 	def all_tags
 	  self.tags.map(&:name).join(", ")
 	end
-	
+
 end

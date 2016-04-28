@@ -7,7 +7,9 @@
   <% @comments.each do |comment| %>
     <li>
       <%= link_to User.find(comment.user_id).name, controller: 'users', action: 'show', id: comment.user_id %> => 
-      <%= comment.content %> <br>
+      <%= comment.content %>
+      <%= link_to "delete", comment, method: :delete,
+                                  data: { confirm: "You sure?" } %>
     </li>
 	<% end %>
 	<% end %>

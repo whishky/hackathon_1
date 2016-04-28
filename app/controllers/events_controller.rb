@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
-	
+	before_action :correct_user,   only: [:edit, :update]
+
 	def start
 
 	end
@@ -62,7 +63,7 @@ class EventsController < ApplicationController
     		#@events = Event.all
     	#binding.pry
     	if params[:tag]
-    		binding.pry
+    		#binding.pry
     		#tagging = Event.tagged_with(params[:tag])
     		#events = Event.all
     		@events = Event.joins(:taggings).where(taggings: {tag_id: Tag.find_by_name(params[:tag]).id})
@@ -97,6 +98,22 @@ class EventsController < ApplicationController
 		@events = Event.all
 		@events = @events.map{|k| k if k.start_date_time.to_s > current_date_time.to_s}.compact
 	end
+
+	# Confirms the correct user.
+    def correct_user
+      @event = Event.find(params[:id])
+      unless @event.user_id != session[:user_id]
+      	current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+      	binding.pry
+      	if @event.start_date_time < current_date_time
+      		flash[:danger] = "gandu u can only edit the future events"
+      		redirect_to(root_url)
+      	else
+      		flash[:danger] = "gandu apne e event edit kr skta tu"
+      		redirect_to(root_url) 
+      	end
+      end
+    end
 
 	private
 		def event_params

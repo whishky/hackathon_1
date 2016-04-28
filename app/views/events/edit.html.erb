@@ -40,6 +40,11 @@
 	</p>
 
 	<p>
+		<%= f.label :all_tags %>
+		<%= f.text_field :all_tags %>
+	</p>
+
+	<p>
 		<%= f.submit 'Edit Event', controller: 'events', action: 'update' %>
 	</p>
 <% end %>
