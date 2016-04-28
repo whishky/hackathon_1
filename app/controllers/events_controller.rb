@@ -102,7 +102,7 @@ class EventsController < ApplicationController
 	# Confirms the correct user.
     def correct_user
       @event = Event.find(params[:id])
-      unless @event.user_id != session[:user_id]
+      unless @event.user_id == session[:user_id]
       	current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
       	binding.pry
       	if @event.start_date_time < current_date_time

@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
+  before_action :correct_user,   only: :destroy
 
   def create
     #binding.pry
@@ -29,6 +30,15 @@ class CommentsController < ApplicationController
   end
 
   def update 
+  end
+
+  def correct_user
+    binding.pry
+    @comment = Comment.find(params[:id])
+    unless @comment.user_id == session[:user_id]
+      flash[:danger] = "gandu u can only delete ur comments"
+      redirect_to controller: 'events', action: 'event_info', id: @comment.event_id
+    end
   end
 
   private
