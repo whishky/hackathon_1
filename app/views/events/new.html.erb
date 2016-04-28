@@ -43,6 +43,10 @@
 	</p>
 
 	<p>
+	<%= f.label :all_tags %>
+	<%= f.text_field :all_tags, placeholder: "Tags separated with comma" %>
+	</p>
+	<p>
 		<%= f.submit 'Create Event', class: "btn btn-primary", controller: 'events', action: 'create' %>
 	</p>
 <% end %>

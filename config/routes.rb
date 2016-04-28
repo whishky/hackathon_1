@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   post 'events/event_info/:id' => 'comments#create'
   resources :comments,          only: [:create, :destroy, :edit, :update]
 
+  get 'tags/:tag', to: 'events#show', as: "tag"
+
   #post '/events/:id/edit' => 'events#update'
 
 

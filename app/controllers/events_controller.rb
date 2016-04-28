@@ -59,11 +59,21 @@ class EventsController < ApplicationController
 	end
 
 	def show
-    		@events = Event.all
+    		#@events = Event.all
+    	#binding.pry
+    	if params[:tag]
+    		binding.pry
+    		#tagging = Event.tagged_with(params[:tag])
+    		#events = Event.all
+    		@events = Event.joins(:taggings).where(taggings: {tag_id: Tag.find_by_name(params[:tag]).id})
+			#@events = Event.tagged_with(params[:tag])
+		else
+			@events = Event.all
+		end
 	end
 
 	def event_info
-		binding.pry
+		#binding.pry
 		@event = Event.find(params[:id])
 		@comments = @event.comments.paginate(page: params[:page])
 	end
@@ -90,7 +100,7 @@ class EventsController < ApplicationController
 
 	private
 		def event_params
-			params.require(:event).permit(:title, :description, :start_date_time, :end_date_time, :city, :address, :event_creater)
+			params.require(:event).permit(:title, :description, :start_date_time, :end_date_time, :city, :address, :event_creater, :all_tags)
 		end
 
 		def event_edit_params
