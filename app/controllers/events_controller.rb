@@ -6,6 +6,9 @@ class EventsController < ApplicationController
 
 	end
 
+	def index
+	end
+
 	def new
 		if logged_in? == false
 			flash[:info] = "Gaandu pehle login kr"
@@ -57,6 +60,11 @@ class EventsController < ApplicationController
 		#else	
 		#	render 'new'
 		#end
+	end
+
+	def search
+		#binding.pry
+		@events = Event.search(params[:search]).order("created_at DESC")
 	end
 
 	def show

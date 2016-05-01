@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'events/present_events' => 'events#_present_events'
   get 'events/past_events' => 'events#past_events'
   get 'events/future_events' => 'events#future_events'
+  get 'events/search' => 'events#search'
   resources :events
   get 'events/show' => 'events#show'
   get 'events/new' => 'events#new'
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
   get 'events/event_info/:id' => 'events#event_info'
   #get 'events/edit' => 'events#edit'
   post 'events/:id/edit' => 'events#update'
+  #get '/events/search' => 'events#search', :as => "search"
+  
 
 
   get    'login'   => 'sessions#new'
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
   resources :comments,          only: [:create, :destroy, :edit, :update]
 
   get 'tags/:tag', to: 'events#show', as: "tag"
+  
 
   #post '/events/:id/edit' => 'events#update'
 

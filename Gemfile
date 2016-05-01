@@ -17,6 +17,10 @@ gem 'faker'
 #for tagging 
 gem 'foundation-rails'
 
+#for rating
+gem 'ratyrate'
+
+
 #for pagination
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'

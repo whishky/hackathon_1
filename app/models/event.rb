@@ -24,4 +24,8 @@ class Event < ActiveRecord::Base
 	  self.tags.map(&:name).join(", ")
 	end
 
+	def self.search(search)
+	  where("title LIKE ? OR description LIKE ? OR city LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+	end
+
 end
