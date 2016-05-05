@@ -11,8 +11,8 @@ class EventsController < ApplicationController
 
 	def new
 		if logged_in? == false
-			flash[:info] = "Gaandu pehle login kr"
-			render 'start'
+			flash[:danger] = "Gaandu pehle login kr"
+			redirect_to '/login'
 		end
 	end
 

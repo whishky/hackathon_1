@@ -1,0 +1,7 @@
+<%#= render 'present_events' %>
+
+<% if @events.present? %>
+  <%= render 'present_events' %>
+<% else %>
+  <p>There are no events containing the term(s) <%= params[:search] %>.</p>
+<% end %>

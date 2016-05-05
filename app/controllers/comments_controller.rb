@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   end
 
   def correct_user
-    binding.pry
+    #binding.pry
     @comment = Comment.find(params[:id])
     unless @comment.user_id == session[:user_id]
       flash[:danger] = "gandu u can only delete ur comments"
