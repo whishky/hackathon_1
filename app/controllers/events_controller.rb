@@ -88,23 +88,18 @@ class EventsController < ApplicationController
 	end
 
 	def _present_events
-		#binding.pry
 		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
-		@events = Event.all
-		@events = @events.map{|k| k if k.start_date_time.to_s <= current_date_time.to_s && k.end_date_time.to_s >= current_date_time.to_s}.compact
+		@events = Event.where("start_date_time <= ? and end_date_time >= ?", current_date_time, current_date_time)
 	end
 
 	def past_events
 		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
-		@events = Event.all
-		@events = @events.map{|k| k if k.end_date_time.to_s < current_date_time.to_s}.compact
-
+		@events = Event.where("end_date_time < ?", current_date_time)
 	end
 
 	def future_events
 		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
-		@events = Event.all
-		@events = @events.map{|k| k if k.start_date_time.to_s > current_date_time.to_s}.compact
+		@events = Event.where("start_date_time > ?", current_date_time)
 	end
 
 	# Confirms the correct user.
