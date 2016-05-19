@@ -43,6 +43,14 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'events#show', as: "tag"
   
+  namespace :api , :path => "", :defaults => {:format => :json} do
+    namespace :v0 do
+      get 'all_events' => 'event#show_all'
+      get 'present_events' => 'event#present_events'
+      get 'past_events' => 'event#past_events'
+      get 'future_events' => 'event#future_events'
+    end
+  end
 
   #post '/events/:id/edit' => 'events#update'
 
