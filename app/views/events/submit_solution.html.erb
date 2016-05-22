@@ -1,0 +1,13 @@
+<%= form_for @gallary do |f| %>
+  <%= render 'shared/error_messages', object: @gallary %>
+
+    <div class="field">
+        <%= f.label :image %><br>
+        <%= f.file_field :image, required: true %>
+    </div>
+    <div> 
+    	<%= hidden_field_tag(:event_id, @event.id) %>
+        <%= f.submit 'Upload', class: "btn btn-primary", controller: 'events', action: 'image_upload'%>
+        <%#= f.submit 'Upload', redirect_to events_image_upload_path( :ide=> @event.id ) %>
+    </div>
+<% end %>
