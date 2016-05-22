@@ -110,7 +110,7 @@ class EventsController < ApplicationController
 	end
 
 	def find_current_time
-		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+		Time.now.strftime("%Y-%m-%d %H:%M")
 	end
 
 	def _present_events

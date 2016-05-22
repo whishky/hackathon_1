@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    binding.pry
+    #binding.pry
   	@event = Event.find(params["id"])
     @user = User.find(session[:user_id])
   	@comment = @event.comments.build(comment_params)
