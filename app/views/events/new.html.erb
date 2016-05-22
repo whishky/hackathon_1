@@ -5,8 +5,8 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
-<%= form_for :event do |f| %>
-	<%#= render 'shared/error_message_event_creation' %>
+<%= form_for @event do |f| %>
+	<%= render 'shared/error_messages', object: @event %>
 	<p>
 		<%= f.label :title %>
 		<%= f.text_field :title %>

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'events/past_events' => 'events#past_events'
   get 'events/future_events' => 'events#future_events'
   get 'events/search' => 'events#search'
+  get 'events/submit_solution' => 'events#submit_solution'
+  post 'events/submit_solution' => 'events#image_upload', as: 'gallaries'
   resources :events
   get 'events/show' => 'events#show'
   get 'events/new' => 'events#new'
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  #post 'events/event_info/:id' => 'events#image_upload'
   post 'events/event_info/:id' => 'comments#create'
   resources :comments,          only: [:create, :destroy, :edit, :update]
 

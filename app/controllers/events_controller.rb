@@ -11,13 +11,14 @@ class EventsController < ApplicationController
 
 	def new
 		if logged_in? == false
-			flash[:danger] = "Gaandu pehle login kr"
+			flash[:danger] = "please login kr"
 			redirect_to '/login'
 		end
+		@event = Event.new
 	end
 
 	def create
-		#binding.pry
+		binding.pry
 		@user = User.find(session[:user_id])
 		@event = @user.events.build(event_params)
 		if @event.save
@@ -62,6 +63,26 @@ class EventsController < ApplicationController
 		#end
 	end
 
+	def submit_solution
+		@event = Event.find(params[:id])
+		@gallary = @event.gallaries.new
+	end
+
+	def image_upload
+		binding.pry
+		@user = User.find(session[:user_id])
+		@event = Event.find(params[:event_id])
+  		@gallary = @event.gallaries.build(gallary_params)
+    	@gallary["user_id"] = @user["id"]
+		if @gallary.save
+			flash[:success] = "Image uploaded"
+			redirect_to controller: 'events', action: 'event_info', id: @event.id
+		else
+			flash[:danger] = "error while uploading image"
+			redirect_to controller: 'events', action: 'submit_solution', id: @event.id
+		end
+	end
+
 	def search
 		#binding.pry
 		@events = Event.search(params[:search]).order("created_at DESC")
@@ -85,6 +106,7 @@ class EventsController < ApplicationController
 		#binding.pry
 		@event = Event.find(params[:id])
 		@comments = @event.comments.paginate(page: params[:page])
+		@gallaries = @event.gallaries
 	end
 
 	def _present_events
@@ -114,10 +136,10 @@ class EventsController < ApplicationController
       	current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
       	binding.pry
       	if @event.start_date_time < current_date_time
-      		flash[:danger] = "gandu u can only edit the future events"
+      		flash[:danger] = "you can only edit the future events"
       		redirect_to(root_url)
       	else
-      		flash[:danger] = "gandu apne e event edit kr skta tu"
+      		flash[:danger] = "you can only edit your events"
       		redirect_to(root_url) 
       	end
       end
@@ -130,5 +152,9 @@ class EventsController < ApplicationController
 
 		def event_edit_params
 			params.require(:event).permit(:title, :description, :start_date_time, :end_date_time, :city, :address, :event_creator)
+		end
+
+		def gallary_params
+			params.require(:gallary).permit(:image, :user_id)
 		end
 end

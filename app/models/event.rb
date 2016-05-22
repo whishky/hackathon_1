@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 
 	belongs_to :user
 	has_many :taggings
+	has_many :gallaries
 	has_many :tags, through: :taggings
 	has_many :comments
 	validates :user_id, presence: true

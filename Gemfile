@@ -20,6 +20,9 @@ gem 'foundation-rails'
 #for rating
 gem 'ratyrate'
 
+#gem "rmagick"
+gem 'carrierwave'
+gem 'mini_magick'
 
 #for pagination
 gem 'will_paginate'

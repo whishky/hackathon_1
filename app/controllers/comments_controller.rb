@@ -3,14 +3,13 @@ class CommentsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    #binding.pry
+    binding.pry
   	@event = Event.find(params["id"])
     @user = User.find(session[:user_id])
   	@comment = @event.comments.build(comment_params)
     @comment["user_id"] = @user["id"]
     if @comment.save
       flash[:success] = "Comment created!"
-      binding.pry
       redirect_to controller: 'events', action: 'event_info', id: @event.id
     else
       render 'events/event_info'
@@ -18,7 +17,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @comment = Comment.find(params[:id])
     @event = Event.find(@comment.event_id)
     @comment.destroy
@@ -36,7 +34,7 @@ class CommentsController < ApplicationController
     #binding.pry
     @comment = Comment.find(params[:id])
     unless @comment.user_id == session[:user_id]
-      flash[:danger] = "gandu u can only delete ur comments"
+      flash[:danger] = "you can only delete your comments"
       redirect_to controller: 'events', action: 'event_info', id: @comment.event_id
     end
   end

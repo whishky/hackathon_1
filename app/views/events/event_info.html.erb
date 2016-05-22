@@ -1,6 +1,15 @@
 
 
 <% provide(:title, @event.title) %>
+
+<% if Time.now.strftime("%Y-%m-%d %H:%M") > @event.end_date_time %> 
+   <p> Sorry, the event is over you cant make submission </p>
+<% elsif Time.now.strftime("%Y-%m-%d %H:%M") < @event.start_date_time %> 
+   <p> Sorry, the event is a future event you cant make submission </p>
+<% else %>
+  <%= link_to "Submit Solution", controller: 'events', action: 'submit_solution', id: @event.id %>
+<% end %>
+
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -49,6 +58,13 @@
     </section>
   </aside>
 </div>
+
+
+<% @gallaries.each do |gallary| %>
+  <%= image_tag gallary.image.thumb.url %>
+<% end %> 
+
+
 
 <%= render 'comments/comment_form' %> 
 
