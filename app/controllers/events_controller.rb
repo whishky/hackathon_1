@@ -109,22 +109,27 @@ class EventsController < ApplicationController
 		@gallaries = @event.gallaries
 	end
 
+	def find_current_time
+		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+	end
+
 	def _present_events
 		#binding.pry
-		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+		#current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+		current_date_time = find_current_time
 		@events = Event.all
 		@events = @events.map{|k| k if k.start_date_time.to_s <= current_date_time.to_s && k.end_date_time.to_s >= current_date_time.to_s}.compact
 	end
 
 	def past_events
-		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+		current_date_time = find_current_time
 		@events = Event.all
 		@events = @events.map{|k| k if k.end_date_time.to_s < current_date_time.to_s}.compact
 
 	end
 
 	def future_events
-		current_date_time = Time.now.strftime("%Y-%m-%d %H:%M")
+		current_date_time = find_current_time
 		@events = Event.all
 		@events = @events.map{|k| k if k.start_date_time.to_s > current_date_time.to_s}.compact
 	end
