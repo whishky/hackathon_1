@@ -6,7 +6,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <%= form_tag(events_search_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search],:value => "",  placeholder: "Search Events" %>
+          <%= text_field_tag :search, params[:search],required: true, :value => "",  placeholder: "Search Events" %>
           <%= submit_tag "Search", :name => nil %>
         <% end %>
         <li><%= link_to "Home", root_path %></li>
