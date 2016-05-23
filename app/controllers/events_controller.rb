@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		binding.pry
+		#binding.pry
 		@user = User.find(session[:user_id])
 		@event = @user.events.build(event_params)
 		if @event.save
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
 	end
 
 	def image_upload
-		binding.pry
+		#binding.pry
 		@user = User.find(session[:user_id])
 		@event = Event.find(params[:event_id])
   		@gallary = @event.gallaries.build(gallary_params)
