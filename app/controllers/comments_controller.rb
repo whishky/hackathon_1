@@ -3,10 +3,9 @@ class CommentsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    #binding.pry
-  	@event = Event.find(params["id"])
+    @event = Event.find(params["id"])
     @user = User.find(session[:user_id])
-  	@comment = @event.comments.build(comment_params)
+    @comment = @event.comments.build(comment_params)
     @comment["user_id"] = @user["id"]
     if @comment.save
       flash[:success] = "Comment created!"

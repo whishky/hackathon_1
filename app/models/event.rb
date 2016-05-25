@@ -2,10 +2,10 @@ class Event < ActiveRecord::Base
 
 
 	belongs_to :user
-	has_many :taggings
-	has_many :gallaries
+	has_many :taggings, dependent: :destroy
+	has_many :gallaries,dependent: :destroy
 	has_many :tags, through: :taggings
-	has_many :comments
+	has_many :comments, dependent: :destroy
 	validates :user_id, presence: true
 	validates :title,  presence: true, length: { maximum: 50 }
 	validates :description,  presence: true, length: { maximum: 500 }
