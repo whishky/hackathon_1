@@ -48,7 +48,15 @@ class EventsController < ApplicationController
   end
 
   def submit_solution
+    if logged_in? == false
+      flash[:danger] = "please login kr"
+      redirect_to '/login'
+    end
     @event = Event.find(params[:id])
+    if current_date_time > @event.end_date_time || current_date_time < @event.start_date_time
+      flash[:danger] = "you can't make submission for this event"
+      redirect_to @event
+    end
     @gallary = @event.gallaries.new
   end
 
@@ -84,24 +92,21 @@ class EventsController < ApplicationController
     @gallaries = @event.gallaries
   end
 
-  def find_current_time
+  def current_date_time
     Time.now.strftime("%Y-%m-%d %H:%M")
   end
 
   def _present_events
-    current_date_time = find_current_time
     @events = Event.all
     @events = @events.map{|k| k if k.start_date_time.to_s <= current_date_time.to_s && k.end_date_time.to_s >= current_date_time.to_s}.compact
   end
 
   def past_events
-    current_date_time = find_current_time
     @events = Event.all
     @events = @events.map{|k| k if k.end_date_time.to_s < current_date_time.to_s}.compact
   end
 
   def future_events
-    current_date_time = find_current_time
     @events = Event.all
     @events = @events.map{|k| k if k.start_date_time.to_s > current_date_time.to_s}.compact
   end
