@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ratingsum: 1
+  rateduser: 1
+  gallary_id: 
+
+two:
+  ratingsum: 1
+  rateduser: 1
+  gallary_id: 
