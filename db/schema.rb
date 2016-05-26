@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520211823) do
+ActiveRecord::Schema.define(version: 20160526111408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "avgratings", force: :cascade do |t|
+    t.integer  "ratingsum"
+    t.integer  "rateduser"
+    t.integer  "gallary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "avgratings", ["gallary_id"], name: "index_avgratings_on_gallary_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -49,6 +59,17 @@ ActiveRecord::Schema.define(version: 20160520211823) do
   end
 
   add_index "gallaries", ["event_id"], name: "index_gallaries_on_event_id", using: :btree
+
+  create_table "gallaryratings", force: :cascade do |t|
+    t.integer  "rating"
+    t.integer  "gallary_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "gallaryratings", ["gallary_id"], name: "index_gallaryratings_on_gallary_id", using: :btree
+  add_index "gallaryratings", ["user_id"], name: "index_gallaryratings_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "event_id"
@@ -85,8 +106,11 @@ ActiveRecord::Schema.define(version: 20160520211823) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "avgratings", "gallaries"
   add_foreign_key "comments", "events"
   add_foreign_key "gallaries", "events"
+  add_foreign_key "gallaryratings", "gallaries"
+  add_foreign_key "gallaryratings", "users"
   add_foreign_key "taggings", "events"
   add_foreign_key "taggings", "tags"
 end

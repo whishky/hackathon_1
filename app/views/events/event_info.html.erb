@@ -9,7 +9,7 @@
 <% else %>
   <%= link_to "Submit Solution", controller: 'events', action: 'submit_solution', id: @event.id %>
 <% end %>
-
+<%= link_to "All Submissions", controller: 'events', action: 'show_submission', id: @event.id %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -59,10 +59,6 @@
   </aside>
 </div>
 
-
-<% @gallaries.each do |gallary| %>
-  <%= image_tag gallary.image.thumb.url %>
-<% end %> 
 
 
 

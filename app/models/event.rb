@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
 	validates :city,  presence: true, length: { maximum: 50 }
 	validates :address,  presence: true, length: { maximum: 50 }
 	validates :event_creater,  presence: true, length: { maximum: 50 }
+  #validate :start_date_time_should_be_less_then_end_date_time
 
 	def all_tags=(names)
 	  self.tags = names.split(",").map do |name|
@@ -28,5 +29,11 @@ class Event < ActiveRecord::Base
 	def self.search(search)
 	  where("title LIKE ? OR description LIKE ? OR city LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
 	end
+
+  #private
+
+  #def start_date_time_should_be_less_then_end_date_time?
+    #errors.add(:end_date_time, "end_date_time should be less then start_date_time") unless start_date_time < end_date_time
+  #end
 
 end

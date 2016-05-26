@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-	before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
 
   def start
   end
@@ -72,6 +72,15 @@ class EventsController < ApplicationController
       flash[:danger] = "error while uploading image"
       redirect_to controller: 'events', action: 'submit_solution', id: @event.id
     end
+  end
+
+  def show_submission
+    @event = Event.find(params[:id])
+    @gallaries = @event.gallaries.all()
+  end
+
+  def show_that_particular_submission
+    @gallary = Gallary.find(params[:id])
   end
 
   def search
