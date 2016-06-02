@@ -1,0 +1,26 @@
+<%= image_tag @gallary.image %> 
+
+<p id = "rating"> Overall Rating : <% if @avg_rat[0].ratingsum == 0 %> 0 
+					 <% else %> 
+					 <%= @avg_rat[0].ratingsum / @avg_rat[0].rateduser %> 
+					 <% end %> 
+</p> 
+
+<input id="quantity" name="quantity" min="1" max="5" step="1" type="number" size = "100"/>
+<input type="button" id="rate" value="Button" />
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"> </script>
+<script>
+ 	 $('#rate').click(function (e) {
+ 	 		e.preventDefault();
+ 	 		var path = "http://localhost:3000/events/update_rating";
+      		 $.ajax({
+      		 		type: "POST",
+      				url: path,
+      				data: {quantity: $('#quantity').val(),
+      			            gallary_id: <%= @gallary.id %> ,
+      			            event_id: <%= @gallary.event_id %>},
+      			    dataType: 'script'
+    		 });
+      });
+</script>

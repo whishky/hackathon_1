@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'events/submit_solution' => 'events#image_upload', as: 'gallaries'
   get 'events/show_submission' => 'events#show_submission'
   get 'events/show_that_particular_submission' => 'events#show_that_particular_submission'
+  post 'events/update_rating' => 'events#update_rating'
   resources :events
   get 'events/show' => 'events#show'
   get 'events/new' => 'events#new'

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :correct_user,   only: [:edit, :update]
+  skip_before_filter  :verify_authenticity_token
 
   def start
   end
@@ -81,6 +82,53 @@ class EventsController < ApplicationController
 
   def show_that_particular_submission
     @gallary = Gallary.find(params[:id])
+    @event = Event.find(@gallary.event_id)
+    @avg_rating = Avgrating.where(:gallary_id => params[:id])
+    @gallary_rating = Gallaryrating.where(:gallary_id => params[:id])
+    if(@avg_rating.size == 0)  
+      @avg_rating = @gallary.avgrating.new
+      @avg_rating.ratingsum = 0
+      @avg_rating.rateduser = 0
+      @avg_rating.save
+    end
+
+    if(@gallary_rating.size == 0)  
+      @gallary_rating = @gallary.gallaryrating.new
+      @gallary_rating.rating = 0
+      @gallary_rating.user_id = @gallary.user_id
+      @gallary_rating.save
+    end
+    @avg_rat = Avgrating.where(:gallary_id => params[:id])
+    @gallary_rat = Gallaryrating.where(:gallary_id => params[:id])
+  end
+
+  def update_rating
+    user_id = session[:user_id]
+    gallary_id = params[:gallary_id]
+    event_id = params[:event_id]
+    rating = params[:quantity]
+    @gallary_rating = Gallaryrating.where(:gallary_id => gallary_id, :user_id => user_id)[0]
+    prev_rating = @gallary_rating.rating
+    @gallary_rating.rating = rating
+    @gallary_rating.user_id = user_id
+    @avg_rating = Avgrating.where(:gallary_id => gallary_id)[0]
+    if prev_rating == 0
+       rateduser = @avg_rating.rateduser.to_i
+       rateduser += 1
+       @avg_rating.rateduser = rateduser
+    end
+    ratingsum = @avg_rating.ratingsum.to_i 
+    ratingsum += (rating.to_i - prev_rating.to_i)
+    @avg_rating.ratingsum = ratingsum
+    @gallary_rating.save
+    @avg_rating.save
+    @avg_rat = Avgrating.where(:gallary_id => gallary_id)
+    @gallary_rat = Gallaryrating.where(:gallary_id => gallary_id, :user_id => user_id)
+    
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js { }
+    end
   end
 
   def search

@@ -1,0 +1,5 @@
+var para = document.getElementById('rating');
+para.innerHTML =  "Overall Rating : " + <% if @avg_rat[0].ratingsum == 0 %> +" 0 " + 
+					 <% else %> 
+					 <%= @avg_rat[0].ratingsum / @avg_rat[0].rateduser %> 
+					 <% end %>;
